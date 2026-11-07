@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ช้อปปิ้งท้าประลองคำอุปสรรคฟิสิกส์ ม.4</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 40%, #86a8e7 70%, #91eae4 100%);
+            min-height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+        .camera-flash {
+            animation: flashEffect 0.5s ease-out;
+        }
+        @keyframes flashEffect {
+            0% { background-color: white; opacity: 1; }
+            100% { background-color: transparent; opacity: 0; }
+        }
+
+        /* Funny Animated Graphics for Shopping Option Icons */
+        .animate-wiggle {
+            animation: wiggle 1.2s infinite ease-in-out;
+        }
+        .animate-jiggle {
+            animation: jiggle 1.5s infinite ease-in-out;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-8deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.1); }
+        }
+        @keyframes jiggle {
+            0%, 100% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-6px) rotate(-4deg); }
+            75% { transform: translateY(3px) rotate(4deg); }
+        }
+
+        /* Touch friendly buttons for iPad screens */
+        .option-btn {
+            min-height: 160px;
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .ipad-text-lg { font-size: 1.25rem; }
+            .ipad-text-xl { font-size: 1.5rem; }
+            .ipad-p-lg { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col items-center justify-start p-3 sm:p-5 lg:p-7">
+
+    <!-- App Container -->
+    <div id="app" class="w-full max-w-6xl mx-auto">
+
+        <!-- HEADER / NAVBAR -->
+        <header class="text-center mb-4 sm:mb-6 text-white drop-shadow-md">
+            <div class="inline-block bg-white/30 backdrop-blur-md px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold mb-2 text-slate-800 border border-white/40">
+                <i class="fa-solid fa-tablet-screen-button text-pink-600 mr-2"></i> สื่อการเรียนรู้วิชาฟิสิกส์ ม.4 (รองรับ iPad & แท็บเล็ต)
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                🛒 ช้อปปิ้งท้าประลองคำอุปสรรคฟิสิกส์
+            </h1>
+            <p class="text-white/90 text-sm sm:text-base mt-1 font-medium">
+                เลือกสินค้าให้คุ้มค่าสุดด้วยพลังคำอุปสรรค SI ภายใน 1 นาที!
+            </p>
+        </header>
+
+        <!-- SCREEN 1: WELCOME & SETUP -->
+        <div id="screen-welcome" class="glass-card rounded-3xl shadow-2xl p-6 sm:p-10 mb-8 transition-all duration-300 max-w-2xl mx-auto">
+            <div class="text-center">
+                <div class="w-24 h-24 bg-gradient-to-tr from-amber-400 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-5 text-white text-5xl shadow-lg transform rotate-3">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-2">ท้าประลองยอดนักช้อปฟิสิกส์!</h2>
+                <p class="text-slate-600 text-sm sm:text-base mb-6">
+                    ฝึกเปรียบเทียบขนาดคำอุปสรรค (Tera, Giga, Mega, Kilo, Milli ฯลฯ) ผ่านสิ่งของในชีวิตประจำวันสำหรับนักเรียนสายศิลป์เข้าใจง่าย ไม่ซับซ้อน!
+                </p>
+
+                <!-- Rules Box -->
+                <div class="bg-amber-50/90 border-2 border-amber-200 rounded-2xl p-4 sm:p-5 text-left mb-6 text-sm sm:text-base text-slate-700 space-y-2">
+                    <div class="font-bold flex items-center text-amber-800 text-base sm:text-lg">
+                        <i class="fa-solid fa-star text-amber-500 mr-2"></i> กติกาสุดสนุก:
+                    </div>
+                    <ul class="list-disc list-inside space-y-1.5 pl-1">
+                        <li>มีเวลาทำภารกิจเลือกสินค้าใน 1 นาที (<span class="font-bold text-pink-600">60 วินาที</span>)</li>
+                        <li>เลือกแผ่นป้ายที่ถูกและคุ้มค่าที่สุดให้ได้ <span class="font-bold text-emerald-600">3 ข้อขึ้นไป</span> เพื่อผ่านภารกิจ</li>
+                        <li>ระหว่างเล่นมี <b>"ตารางสรุปคำอุปสรรค"</b> ข้างหน้าจอช่วยใบ้ทบทวนตลอดเวลา!</li>
+                        <li>ผ่านแล้วรับของรางวัลสุดแปลก พร้อมถ่ายรูป <span class="font-bold text-purple-600">"3 2 1 แชะ!"</span> เข้า Hall of Fame</li>
+                    </ul>
+                </div>
+
+                <!-- Input Name -->
+                <div class="mb-6 text-left">
+                    <label for="playerName" class="block text-sm sm:text-base font-bold text-slate-700 mb-2">
+                        <i class="fa-solid fa-user-tag text-indigo-600 mr-1"></i> ชื่อหรือชื่อเล่นของนักเรียน:
+                    </label>
+                    <input type="text" id="playerName" placeholder="เช่น พี่ศิลป์สุดเจ๋ง (ม.4/5)" class="w-full px-4 py-3.5 rounded-xl border-2 border-slate-300 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none text-base transition bg-white/80">
+                    <p id="nameError" class="text-red-500 text-xs font-semibold mt-1 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> กรุณากรอกชื่อก่อนเริ่มช้อปปิ้งครับ!</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="startGame()" class="flex-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 hover:opacity-95 text-white font-extrabold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transition transform active:scale-95 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-bag-shopping mr-2 text-xl"></i> เริ่มเล่นเกมเลย!
+                    </button>
+                    <button onclick="showHallOfFame()" class="bg-white hover:bg-slate-50 text-purple-700 border-2 border-purple-200 font-bold py-4 px-6 rounded-2xl shadow transition flex items-center justify-center">
+                        <i class="fa-solid fa-trophy mr-2 text-amber-500"></i> Hall of Fame
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: GAMEPLAY WITH CHEAT SHEET SIDEBAR -->
+        <div id="screen-game" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6">
+                
+                <!-- MAIN GAME AREA (2 COLS ON LARGE SCREEN & IPAD LANDSCAPE) -->
+                <div class="lg:col-span-2 glass-card rounded-3xl shadow-2xl p-5 sm:p-7">
+                    <!-- Top Game Status Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-pink-600 text-white flex items-center justify-center font-extrabold text-lg sm:text-xl shadow">
+                                <span id="currentQNum">1</span>
+                            </div>
+                            <div>
+                                <div class="text-xs sm:text-sm text-slate-500 font-medium">นักช้อปสายศิลป์</div>
+                                <div id="displayPlayerName" class="font-bold text-slate-800 text-sm sm:text-lg truncate max-w-[150px] sm:max-w-xs">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Timer & Score -->
+                        <div class="flex items-center gap-3">
+                            <div class="bg-rose-100 border border-rose-300 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center text-rose-700 font-extrabold text-base sm:text-lg shadow-sm">
+                                <i class="fa-solid fa-stopwatch mr-2 animate-pulse text-rose-600"></i>
+                                <span id="timerText">60</span>s
+                            </div>
+                            <div class="bg-emerald-100 border border-emerald-300 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center text-emerald-800 font-extrabold text-base sm:text-lg shadow-sm">
+                                <i class="fa-solid fa-basket-shopping mr-2 text-emerald-600"></i>
+                                ถูก <span id="scoreCount" class="mx-1 text-xl">0</span> ข้อ
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-200 h-3 rounded-full mb-5 overflow-hidden">
+                        <div id="gameProgressBar" class="bg-gradient-to-r from-pink-500 to-purple-600 h-full rounded-full transition-all duration-300" style="width: 10%;"></div>
+                    </div>
+
+                    <!-- Question Card Header -->
+                    <div class="mb-5 bg-indigo-50/80 p-4 sm:p-5 rounded-2xl border border-indigo-100">
+                        <span id="questionTag" class="inline-block bg-pink-500 text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full mb-2 shadow-sm">
+                            หมวดหมู่: เทคโนโลยี
+                        </span>
+                        <h3 id="questionTitle" class="text-base sm:text-xl font-bold text-slate-800 leading-snug">
+                            โจทย์คำถามจะแสดงที่นี่...
+                        </h3>
+                    </div>
+
+                    <!-- Options Grid (Shopping Cards with Big Visual Icons for iPad Tapping) -->
+                    <div id="optionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                        <!-- Dynamically populated options with randomized position -->
+                    </div>
+
+                </div>
+
+                <!-- SIDEBAR: CHEAT SHEET TABLE (IPAD FRIENDLY DISPLAY) -->
+                <div class="glass-card rounded-3xl shadow-xl p-4 sm:p-6 border-2 border-indigo-200">
+                    <div class="flex items-center space-x-2 mb-3 pb-2 border-b border-slate-200 text-indigo-900">
+                        <i class="fa-solid fa-book-open text-pink-600 text-xl sm:text-2xl"></i>
+                        <h4 class="font-extrabold text-base sm:text-lg">ตารางสรุปคำอุปสรรค (SI)</h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 mb-3">แอบดูประกอบการตัดสินใจช้อปปิ้งได้เลย!</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-indigo-600 text-white font-bold">
+                                    <th class="p-2 sm:p-2.5 rounded-l-lg">คำอุปสรรค</th>
+                                    <th class="p-2 sm:p-2.5 text-center">สัญลักษณ์</th>
+                                    <th class="p-2 sm:p-2.5 rounded-r-lg text-right">ตัวคูณพลังสิบ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-medium">
+                                <tr class="hover:bg-pink-50/60 transition"><td class="p-2 sm:p-2.5 font-bold text-purple-700">เพตะ (Peta)</td><td class="p-2 sm:p-2.5 text-center font-bold">P</td><td class="p-2 sm:p-2.5 text-right text-indigo-600">10<sup>15</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition bg-indigo-50/40"><td class="p-2 sm:p-2.5 font-bold text-purple-700">เทระ (Tera)</td><td class="p-2 sm:p-2.5 text-center font-bold">T</td><td class="p-2 sm:p-2.5 text-right text-indigo-600">10<sup>12</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition"><td class="p-2 sm:p-2.5 font-bold text-purple-700">กิกะ (Giga)</td><td class="p-2 sm:p-2.5 text-center font-bold">G</td><td class="p-2 sm:p-2.5 text-right text-indigo-600">10<sup>9</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition bg-indigo-50/40"><td class="p-2 sm:p-2.5 font-bold text-purple-700">เมกะ (Mega)</td><td class="p-2 sm:p-2.5 text-center font-bold">M</td><td class="p-2 sm:p-2.5 text-right text-indigo-600">10<sup>6</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition"><td class="p-2 sm:p-2.5 font-bold text-purple-700">กิโล (Kilo)</td><td class="p-2 sm:p-2.5 text-center font-bold">k</td><td class="p-2 sm:p-2.5 text-right text-indigo-600">10<sup>3</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition bg-indigo-50/40"><td class="p-2 sm:p-2.5 font-bold text-purple-700">เซนติ (Centi)</td><td class="p-2 sm:p-2.5 text-center font-bold">c</td><td class="p-2 sm:p-2.5 text-right text-pink-600">10<sup>-2</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition"><td class="p-2 sm:p-2.5 font-bold text-purple-700">มิลลิ (Milli)</td><td class="p-2 sm:p-2.5 text-center font-bold">m</td><td class="p-2 sm:p-2.5 text-right text-pink-600">10<sup>-3</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition bg-indigo-50/40"><td class="p-2 sm:p-2.5 font-bold text-purple-700">ไมโคร (Micro)</td><td class="p-2 sm:p-2.5 text-center font-bold">μ</td><td class="p-2 sm:p-2.5 text-right text-pink-600">10<sup>-6</sup></td></tr>
+                                <tr class="hover:bg-pink-50/60 transition"><td class="p-2 sm:p-2.5 font-bold text-purple-700">นาโน (Nano)</td><td class="p-2 sm:p-2.5 text-center font-bold">n</td><td class="p-2 sm:p-2.5 text-right text-pink-600">10<sup>-9</sup></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULT & REWARD SCREEN -->
+        <div id="screen-result" class="glass-card rounded-3xl shadow-2xl p-6 sm:p-10 mb-8 hidden text-center max-w-2xl mx-auto">
+            <div id="resultIcon" class="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-4 text-5xl shadow-lg">
+                🎉
+            </div>
+            <h2 id="resultTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-2">ผ่านภารกิจช้อปปิ้งแล้ว!</h2>
+            <p id="resultSubtitle" class="text-slate-600 text-sm sm:text-base mb-6">คุณทำคะแนนได้ยอดเยี่ยมและเข้าใจคำอุปสรรคฟิสิกส์อย่างแม่นยำ</p>
+
+            <div class="bg-indigo-50/90 border border-indigo-200 rounded-2xl p-4 sm:p-5 max-w-md mx-auto mb-6 text-left shadow-sm text-sm sm:text-base">
+                <div class="flex justify-between items-center mb-2 pb-2 border-b border-indigo-100">
+                    <span class="text-slate-600">ชื่อนักเรียน:</span>
+                    <span id="resName" class="font-bold text-indigo-900">-</span>
+                </div>
+                <div class="flex justify-between items-center mb-2 pb-2 border-b border-indigo-100">
+                    <span class="text-slate-600">คะแนนตอบถูก:</span>
+                    <span id="resScore" class="font-bold text-emerald-600 text-lg">-</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">รางวัลช้อปปิ้ง:</span>
+                    <span id="resRewardStatus" class="font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-lg text-xs sm:text-sm">ปลดล็อกแล้ว! 🎁</span>
+                </div>
+            </div>
+
+            <!-- WIN REWARD & PHOTO BOOTH SECTION -->
+            <div id="winSection" class="mb-6">
+                <div class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white p-4 sm:p-5 rounded-2xl shadow-lg mb-6">
+                    <h3 class="font-bold text-sm sm:text-base mb-1"><i class="fa-solid fa-gift mr-2 text-amber-300"></i> คุณได้รับรางวัลสุดแปลกประทับใจ:</h3>
+                    <p id="rewardItemName" class="text-lg sm:text-2xl font-extrabold text-amber-200 tracking-wide">ยางลบเป็ดเหลืองอาบน้ำเรืองแสงพลังควอนตัม</p>
+                </div>
+
+                <!-- PHOTO BOOTH AREA -->
+                <div class="bg-white p-4 sm:p-6 rounded-2xl border-2 border-pink-200 shadow-inner max-w-lg mx-auto mb-6">
+                    <h4 class="font-bold text-slate-800 mb-3 text-sm sm:text-base"><i class="fa-solid fa-camera-retro mr-2 text-pink-600"></i> ถ่ายรูปบันทึกความทรงจำ (3 2 1 แชะ!)</h4>
+                    
+                    <div id="cameraContainer" class="relative rounded-xl overflow-hidden bg-slate-900 aspect-video mb-3 flex items-center justify-center shadow">
+                        <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover transform -scale-x-100"></video>
+                        <canvas id="snapshotCanvas" class="hidden"></canvas>
+                        
+                        <!-- Flash Overlay -->
+                        <div id="flashOverlay" class="absolute inset-0 pointer-events-none"></div>
+                        
+                        <!-- Countdown Overlay -->
+                        <div id="countdownDisplay" class="absolute inset-0 flex items-center justify-center text-white text-6xl font-extrabold bg-black/40 backdrop-blur-xs hidden">
+                            3
+                        </div>
+
+                        <!-- Fallback / Preview image slot -->
+                        <div id="photoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 bg-slate-100 p-4">
+                            <i class="fa-solid fa-camera text-4xl mb-2 text-slate-400"></i>
+                            <p class="text-xs sm:text-sm">กดปุ่มเริ่มถ่ายรูปด้านล่าง</p>
+                        </div>
+                    </div>
+
+                    <div id="photoResultContainer" class="hidden mb-3">
+                        <img id="capturedPhotoImg" class="rounded-xl mx-auto max-h-52 border-2 border-pink-500 shadow-md transform -scale-x-100" alt="Captured Photo">
+                        <p class="text-xs sm:text-sm text-emerald-600 font-bold mt-2"><i class="fa-solid fa-circle-check"></i> บันทึกภาพถ่ายเข้า Hall of Fame เรียบร้อย!</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
+                        <button id="startCaptureBtn" onclick="startPhotoCountdown()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-xl shadow transition flex items-center justify-center text-sm sm:text-base active:scale-95">
+                            <i class="fa-solid fa-camera mr-2"></i> 3 2 1 แชะ! ถ่ายรูป
+                        </button>
+                        <button onclick="showHallOfFame()" class="bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-xl shadow transition flex items-center justify-center text-sm sm:text-base active:scale-95">
+                            <i class="fa-solid fa-trophy mr-2 text-amber-400"></i> Hall of Fame
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOSE SECTION -->
+            <div id="loseSection" class="hidden mb-6">
+                <p class="text-slate-600 text-sm sm:text-base mb-6">ตอบถูกยังไม่ถึง 3 ข้อ ไม่เป็นไรครับ ลองทบทวนตารางคำอุปสรรคแล้วลองช้อปปิ้งใหม่อีกครั้ง!</p>
+            </div>
+
+            <div class="flex justify-center gap-4">
+                <button onclick="resetGame()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 text-white font-extrabold py-3.5 px-8 rounded-xl shadow transition flex items-center text-base sm:text-lg active:scale-95">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> ลองเล่นใหม่อีกครั้ง
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: HALL OF FAME -->
+        <div id="screen-hof" class="glass-card rounded-3xl shadow-2xl p-5 sm:p-8 mb-8 hidden max-w-4xl mx-auto">
+            <div class="flex justify-between items-center mb-6 pb-3 border-b border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl shadow">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">Hall of Fame</h2>
+                        <p class="text-xs sm:text-sm text-slate-500">ทำเนียบสุดยอดนักช้อปสายศิลป์ ม.4</p>
+                    </div>
+                </div>
+                <button onclick="backToWelcome()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2 px-4 rounded-xl transition text-sm flex items-center">
+                    <i class="fa-solid fa-house mr-1.5"></i> หน้าแรก
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-indigo-100 text-indigo-900 text-xs sm:text-sm uppercase tracking-wider font-extrabold">
+                            <th class="p-3 rounded-l-xl">อันดับ</th>
+                            <th class="p-3">ชื่อนักเรียน</th>
+                            <th class="p-3">คะแนน</th>
+                            <th class="p-3">เวลา</th>
+                            <th class="p-3 rounded-r-xl text-center">รูปถ่ายความประทับใจ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hofTableBody" class="divide-y divide-slate-100 text-sm">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyHof" class="text-center py-10 text-slate-400 hidden">
+                <i class="fa-solid fa-folder-open text-4xl mb-2"></i>
+                <p>ยังไม่มีข้อมูลใน Hall of Fame มาเป็นคนแรกกันเลย!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CENTER OVERLAY POP-UP FEEDBACK MODAL (INSTANT TRANSITION) -->
+    <div id="centerFeedbackModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl border-4 border-indigo-300 shadow-2xl max-w-lg w-full p-6 text-center transform transition-all scale-100 animate-fadeIn">
+            <div id="modalIcon" class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-3 text-4xl shadow-lg">
+                <!-- Dynamic icon -->
+            </div>
+            <h3 id="modalTitle" class="text-2xl font-extrabold text-slate-800 mb-1">
+                <!-- Correct / Wrong Title -->
+            </h3>
+            <div id="modalScoreBadge" class="inline-block px-4 py-1.5 rounded-full font-bold text-sm mb-4">
+                <!-- Score badge -->
+            </div>
+            <div id="modalExplanation" class="bg-indigo-50/80 p-4 rounded-2xl text-slate-700 text-sm sm:text-base border border-indigo-100 text-left mb-6 leading-relaxed">
+                <!-- Explanation text -->
+            </div>
+            <button onclick="instantNextQuestion()" class="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 hover:opacity-95 text-white font-extrabold py-4 rounded-2xl shadow-lg text-lg flex items-center justify-center active:scale-95 transition">
+                ลุยข้อถัดไปทันที <i class="fa-solid fa-bolt ml-2 text-yellow-300"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-white/90 text-xs sm:text-sm mt-auto pb-4 font-medium drop-shadow">
+        <p>สื่อการสอนฟิสิกส์ ม.4 | สนุกกับการเรียนรู้คำอุปสรรคระบบ SI</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- WEB AUDIO API SYNTHESIZER SOUND EFFECTS ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                // Happy Arpeggio Chime
+                const osc1 = audioCtx.createOscillator();
+                const osc2 = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc1.type = 'sine';
+                osc2.type = 'triangle';
+
+                osc1.frequency.setValueAtTime(523.25, now); // C5
+                osc1.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                osc1.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                osc1.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc1.start(now);
+                osc1.stop(now + 0.6);
+            } else if (type === 'wrong') {
+                // Soft Low Buzzer
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(110, now + 0.3);
+
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        }
+
+        // --- 30 EASY & VISUAL PHYSICS PREFIX QUESTIONS FOR ART STUDENTS ---
+        const questionBank = [
+            // ... existing questions 1 to 30 ...
+            {
+                id: 1,
+                tag: "สมาร์ทโฟน & เมมโมรี่",
+                title: "เลือกซื้อแฟลชไดรฟ์เก็บรูปวาดและผลงานศิลปะ แผ่นป้ายใดได้พื้นที่ความจุเยอะที่สุด?",
+                options: [
+                    { name: "แฟลชไดรฟ์ความจุ 1 TB", prefix: "Tera", icon: "fa-hard-drive", iconColor: "text-purple-600", isCorrect: true },
+                    { name: "แฟลชไดรฟ์ความจุ 500 GB", prefix: "Giga", icon: "fa-sd-card", iconColor: "text-blue-500", isCorrect: false }
+                ],
+                explanation: "<b>1 TB (Tera)</b> = 1,000,000,000,000 Byte (10<sup>12</sup> Byte)<br><b>500 GB (Giga)</b> = 500,000,000,000 Byte (5 × 10<sup>11</sup> Byte)<br>👉 <b>1 TB</b> ให้ความจุมากกว่า 500 GB ถึงเท่าตัว! (Tera ใหญ่กว่า Giga)"
+            },
+            {
+                id: 2,
+                tag: "เน็ตบ้านสุดแรง",
+                title: "เลือกแพ็กเกจอินเทอร์เน็ตดูซีรีส์และวาดรูปออนไลน์ แพ็กเกจใดส่งข้อมูลได้ไวกว่า?",
+                options: [
+                    { name: "เน็ต Fiber ความเร็ว 1 Gbps", prefix: "Giga", icon: "fa-wifi", iconColor: "text-emerald-500", isCorrect: true },
+                    { name: "เน็ตบ้านความเร็ว 800 Mbps", prefix: "Mega", icon: "fa-network-wired", iconColor: "text-amber-500", isCorrect: false }
+                ],
+                explanation: "<b>1 Gbps (Giga)</b> = 1,000,000,000 Bit/s (10<sup>9</sup> Bit/s)<br><b>800 Mbps (Mega)</b> = 800,000,000 Bit/s (8 × 10<sup>8</sup> Bit/s)<br>👉 <b>1 Gbps</b> เร็วกว่าเพราะ Giga (10<sup>9</sup>) มากกว่า Mega (10<sup>6</sup>)"
+            },
+            {
+                id: 3,
+                tag: "เครื่องดื่มคลายร้อน",
+                title: "คุณกำลังหิวน้ำและไปซื้อน้ำดื่มในมินิมาร์ท แผ่นป้ายขวดน้ำใดมีปริมาตรน้ำเยอะกว่ากัน?",
+                options: [
+                    { name: "น้ำดื่มขนาด 1.5 ลิตร (L)", prefix: "Base", icon: "fa-bottle-water", iconColor: "text-sky-500", isCorrect: true },
+                    { name: "น้ำดื่มขนาด 500 มิลลิลิตร (mL)", prefix: "Milli", icon: "fa-glass-water", iconColor: "text-blue-400", isCorrect: false }
+                ],
+                explanation: "<b>1.5 L (ลิตร)</b> = 1.5 ลิตร<br><b>500 mL (มิลลิลิตร)</b> = 0.5 ลิตร (500 × 10<sup>-3</sup> L)<br>👉 <b>1.5 ลิตร</b> เยอะกว่า 500 มิลลิลิตร ถึง 3 เท่า!"
+            },
+            {
+                id: 4,
+                tag: "พาวเวอร์แบงก์ไปเที่ยว",
+                title: "เลือกพาวเวอร์แบงก์ไปถ่ายรูปตอนไปเที่ยวต่างจังหวัด แผ่นป้ายใดจุแบตเตอรี่ได้มากกว่า?",
+                options: [
+                    { name: "แบตสำรอง 20,000 mAh", prefix: "Milli", icon: "fa-battery-full", iconColor: "text-emerald-600", isCorrect: true },
+                    { name: "แบตสำรอง 5,000 mAh", prefix: "Milli", icon: "fa-battery-half", iconColor: "text-rose-500", isCorrect: false }
+                ],
+                explanation: "<b>20,000 mAh</b> = 20 Ah (20,000 × 10<sup>-3</sup> Ah)<br><b>5,000 mAh</b> = 5 Ah (5,000 × 10<sup>-3</sup> Ah)<br>👉 <b>20,000 mAh</b> ให้แบตเยอะกว่าอย่างเห็นได้ชัด!"
+            },
+            {
+                id: 5,
+                tag: "วิ่งออกกำลังกาย",
+                title: "เพื่อนสองคนชวนไปวิ่งออกกำลังกาย ระยะทางของแผ่นป้ายใดวิ่งได้ไกลกว่ากัน?",
+                options: [
+                    { name: "วิ่งระยะทาง 5 กิโลเมตร (km)", prefix: "Kilo", icon: "fa-person-running", iconColor: "text-orange-500", isCorrect: true },
+                    { name: "วิ่งระยะทาง 800 เมตร (m)", prefix: "Base", icon: "fa-shoe-prints", iconColor: "text-slate-600", isCorrect: false }
+                ],
+                explanation: "<b>5 km (กิโลเมตร)</b> = 5,000 เมตร (5 × 10<sup>3</sup> m)<br><b>800 m (เมตร)</b> = 800 เมตร<br>👉 <b>5 กิโลเมตร</b> ไกลกว่า 800 เมตรมาก (Kilo คือ 10<sup>3</sup> เท่า)"
+            },
+            {
+                id: 6,
+                tag: "น้ำหนักขนม",
+                title: "ไปร้านสะดวกซื้อซื้อถุงขนมทานเล่น ถุงในแผ่นป้ายใดมีมวลน้ำหนักมากกว่า?",
+                options: [
+                    { name: "ขนมถุงใหญ่หนัก 1 กิโลกรัม (kg)", prefix: "Kilo", icon: "fa-box-open", iconColor: "text-amber-600", isCorrect: true },
+                    { name: "ขนมถุงเล็กหนัก 500 กรัม (g)", prefix: "Base", icon: "fa-cookie-bite", iconColor: "text-amber-800", isCorrect: false }
+                ],
+                explanation: "<b>1 kg (กิโลกรัม)</b> = 1,000 กรัม (1 × 10<sup>3</sup> g)<br><b>500 g (กรัม)</b> = 500 กรัม<br>👉 <b>1 กิโลกรัม</b> หนักกว่า 500 กรัม ถึงเท่าตัว!"
+            },
+            {
+                id: 7,
+                tag: "กล้องถ่ายรูปสุดชัด",
+                title: "นักเรียนสายศิลป์เลือกซื้อกล้องถ่ายภาพผลงาน แผ่นป้ายใดให้ความละเอียดภาพสูงสุด?",
+                options: [
+                    { name: "กล้องละเอียด 50 เมกะพิกเซล (MP)", prefix: "Mega", icon: "fa-camera", iconColor: "text-indigo-600", isCorrect: true },
+                    { name: "กล้องละเอียด 12 เมกะพิกเซล (MP)", prefix: "Mega", icon: "fa-camera-retro", iconColor: "text-pink-500", isCorrect: false }
+                ],
+                explanation: "<b>50 MP (Mega)</b> = 50,000,000 พิกเซล (50 × 10<sup>6</sup>)<br><b>12 MP (Mega)</b> = 12,000,000 พิกเซล (12 × 10<sup>6</sup>)<br>👉 <b>50 เมกะพิกเซล</b> คมชัดกว่าเพราะตัวเลขตั้งต้นเยอะกว่าในหน่วย Mega"
+            },
+            {
+                id: 8,
+                tag: "ความยาวไม้บรรทัด",
+                title: "วัดความยาวกระดาษวาดภาพ อุปกรณ์แผ่นป้ายใดมีความยาวมากกว่า?",
+                options: [
+                    { name: "ไม้บรรทัดยาว 30 เซนติเมตร (cm)", prefix: "Centi", icon: "fa-ruler-combined", iconColor: "text-blue-600", isCorrect: true },
+                    { name: "ตลับเมตรยาว 200 มิลลิเมตร (mm)", prefix: "Milli", icon: "fa-ruler-horizontal", iconColor: "text-indigo-500", isCorrect: false }
+                ],
+                explanation: "<b>30 cm (เซนติเมตร)</b> = 0.3 เมตร (30 × 10<sup>-2</sup> m หรือ 300 mm)<br><b>200 mm (มิลลิเมตร)</b> = 0.2 เมตร (200 × 10<sup>-3</sup> m หรือ 20 cm)<br>👉 <b>30 cm</b> ยาวกว่า 200 mm!"
+            },
+            {
+                id: 9,
+                tag: "ประหยัดไฟ",
+                title: "หลอดไฟวาดรูปสองหลอด หลอดในแผ่นป้ายใดใช้พลังงานไฟฟ้าน้อยกว่า (ประหยัดไฟกว่า)?",
+                options: [
+                    { name: "หลอดไฟ LED 10 วัตต์ (W)", prefix: "Base", icon: "fa-lightbulb", iconColor: "text-amber-400", isCorrect: true },
+                    { name: "หลอดไฟสปอตไลต์ 1 กิโลวัตต์ (kW)", prefix: "Kilo", icon: "fa-bolt", iconColor: "text-yellow-500", isCorrect: false }
+                ],
+                explanation: "<b>10 W (วัตต์)</b> = 10 วัตต์<br><b>1 kW (กิโลวัตต์)</b> = 1,000 วัตต์ (1 × 10<sup>3</sup> W)<br>👉 <b>10 วัตต์</b> กินไฟน้อยกว่า 1 กิโลวัตต์ ถึง 100 เท่า!"
+            },
+            {
+                id: 10,
+                tag: "แผ่นมาร์กหน้า",
+                title: "เลือกแผ่นมาร์กหน้าบำรุงผิวหน้า แผ่นป้ายใดมีความบางเบานาโนมาร์กน้อยกว่า (บางเรียบเนียนกว่า)?",
+                options: [
+                    { name: "มาร์กบาง 100 นาโนเมตร (nm)", prefix: "Nano", icon: "fa-face-smile", iconColor: "text-pink-400", isCorrect: true },
+                    { name: "มาร์กบาง 1 มิลลิเมตร (mm)", prefix: "Milli", icon: "fa-sheet-plastic", iconColor: "text-slate-400", isCorrect: false }
+                ],
+                explanation: "<b>100 nm (นาโนเมตร)</b> = 0.0000001 เมตร (100 × 10<sup>-9</sup> m)<br><b>1 mm (มิลลิเมตร)</b> = 0.001 เมตร (1 × 10<sup>-3</sup> m)<br>👉 <b>100 นาโนเมตร</b> บางกว่ามิลลิเมตรถึง 10,000 เท่า! (Nano เล็กกว่า Milli)"
+            },
+            {
+                id: 11,
+                tag: "ขนาดชิปไอโฟน",
+                title: "เทคโนโลยีชิปประมวลผลสมาร์ทโฟน ชิปขนาดแผ่นป้ายใดมีขนาดเล็กจิ๋วทันสมัยกว่า?",
+                options: [
+                    { name: "ชิปขนาด 3 นาโนเมตร (nm)", prefix: "Nano", icon: "fa-microchip", iconColor: "text-purple-600", isCorrect: true },
+                    { name: "ชิปขนาด 5 ไมโครเมตร (μm)", prefix: "Micro", icon: "fa-memory", iconColor: "text-indigo-400", isCorrect: false }
+                ],
+                explanation: "<b>3 nm (นาโนเมตร)</b> = 3 × 10<sup>-9</sup> เมตร<br><b>5 μm (ไมโครเมตร)</b> = 5,000 × 10<sup>-9</sup> เมตร (5 × 10<sup>-6</sup> m)<br>👉 <b>3 นาโนเมตร</b> เล็กจิ๋วระดับอนู ทันสมัยกว่ามาก!"
+            },
+            {
+                id: 12,
+                tag: "ฟังเพลงวิทยุ",
+                title: "ฟังคลื่นเพลงฮิตติดชาร์ต คลื่นสถานีในแผ่นป้ายใดมีความถี่สูงกว่า?",
+                options: [
+                    { name: "สถานี FM 100 เมกะเฮิรตซ์ (MHz)", prefix: "Mega", icon: "fa-radio", iconColor: "text-rose-500", isCorrect: true },
+                    { name: "สถานี AM 800 กิโลเฮิรตซ์ (kHz)", prefix: "Kilo", icon: "fa-tower-broadcast", iconColor: "text-indigo-600", isCorrect: false }
+                ],
+                explanation: "<b>100 MHz (เมกะเฮิรตซ์)</b> = 100,000,000 Hz (100 × 10<sup>6</sup> Hz)<br><b>800 kHz (กิโลเฮิรตซ์)</b> = 800,000 Hz (800 × 10<sup>3</sup> Hz)<br>👉 <b>100 MHz</b> มีความถี่สูงกว่า (Mega มากกว่า Kilo)"
+            },
+            {
+                id: 13,
+                tag: "ความจุน้ำมันรถ",
+                title: "เติมน้ำมันรถถังใหญ่ แผ่นป้ายใดจุน้ำมันได้เยอะกว่า?",
+                options: [
+                    { name: "ถังน้ำมันจุ 50 ลิตร (L)", prefix: "Base", icon: "fa-gas-pump", iconColor: "text-red-500", isCorrect: true },
+                    { name: "แกลลอนจุ 5,000 มิลลิลิตร (mL)", prefix: "Milli", icon: "fa-bottle-droplet", iconColor: "text-amber-600", isCorrect: false }
+                ],
+                explanation: "<b>50 L (ลิตร)</b> = 50 ลิตร<br><b>5,000 mL (มิลลิลิตร)</b> = 5 ลิตร (5,000 × 10<sup>-3</sup> L)<br>👉 <b>50 ลิตร</b> เยอะกว่าถังแกลลอนถึง 10 เท่า!"
+            },
+            {
+                id: 14,
+                tag: "ความเร็วรถยนต์",
+                title: "ขับรถไปเที่ยวทะเล รถในแผ่นป้ายใดวิ่งด้วยความเร็วสูงกว่า?",
+                options: [
+                    { name: "รถสปอร์ตเร็ว 120 กิโลเมตร/ชั่วโมง (km/h)", prefix: "Kilo", icon: "fa-car-side", iconColor: "text-red-600", isCorrect: true },
+                    { name: "รถจักรยานเร็ว 20,000 เมตร/ชั่วโมง (m/h)", prefix: "Base", icon: "fa-bicycle", iconColor: "text-emerald-500", isCorrect: false }
+                ],
+                explanation: "<b>120 km/h</b> = 120,000 เมตร/ชั่วโมง (120 × 10<sup>3</sup> m/h)<br><b>20,000 m/h</b> = 20 กิโลเมตร/ชั่วโมง<br>👉 <b>120 km/h</b> เร็วกว่าเห็นๆ!"
+            },
+            {
+                id: 15,
+                tag: "ขนาดหน้าจอมอนิเตอร์",
+                title: "ซื้อจอคอมพิวเตอร์ตัดต่อวาดภาพ แผ่นป้ายใดมีขนาดหน้าจอกว้างยาวกว่า?",
+                options: [
+                    { name: "จอขนาด 60 เซนติเมตร (cm)", prefix: "Centi", icon: "fa-desktop", iconColor: "text-sky-600", isCorrect: true },
+                    { name: "จอขนาด 400 มิลลิเมตร (mm)", prefix: "Milli", icon: "fa-tv", iconColor: "text-slate-700", isCorrect: false }
+                ],
+                explanation: "<b>60 cm (เซนติเมตร)</b> = 600 มิลลิเมตร (60 × 10<sup>-2</sup> m)<br><b>400 mm (มิลลิเมตร)</b> = 40 เซนติเมตร (400 × 10<sup>-3</sup> m)<br>👉 <b>60 cm</b> ใหญ่กว้างกว่า 400 mm!"
+            },
+            {
+                id: 16,
+                tag: "ดาวน์โหลดไฟล์งาน",
+                title: "ส่งไฟล์ผลงานวาดภาพให้ครู ไฟล์แผ่นป้ายใดมีขนาดใหญ่กว่า?",
+                options: [
+                    { name: "ไฟล์ภาพ 2 Gigabytes (GB)", prefix: "Giga", icon: "fa-file-image", iconColor: "text-purple-500", isCorrect: true },
+                    { name: "ไฟล์ภาพ 500 Megabytes (MB)", prefix: "Mega", icon: "fa-file-lines", iconColor: "text-blue-400", isCorrect: false }
+                ],
+                explanation: "<b>2 GB (Giga)</b> = 2,000,000,000 Byte (2 × 10<sup>9</sup> Byte)<br><b>500 MB (Mega)</b> = 500,000,000 Byte (500 × 10<sup>6</sup> Byte)<br>👉 <b>2 GB</b> ใหญ่กว่า 500 MB ถึง 4 เท่า!"
+            },
+            {
+                id: 17,
+                tag: "ถุงกาแฟสด",
+                title: "สั่งกาแฟทานตอนอ่านหนังสือ เมนูแผ่นป้ายใดให้ปริมาณกาแฟมากกว่า?",
+                options: [
+                    { name: "แก้วใหญ่ 1 ลิตร (L)", prefix: "Base", icon: "fa-mug-hot", iconColor: "text-amber-900", isCorrect: true },
+                    { name: "แก้วเล็ก 250 มิลลิลิตร (mL)", prefix: "Milli", icon: "fa-mug-saucer", iconColor: "text-amber-700", isCorrect: false }
+                ],
+                explanation: "<b>1 L (ลิตร)</b> = 1,000 มิลลิลิตร<br><b>250 mL (มิลลิลิตร)</b> = 0.25 ลิตร<br>👉 <b>1 ลิตร</b> เยอะกว่าแก้วเล็กถึง 4 เท่า!"
+            },
+            {
+                id: 18,
+                tag: "ความสูงภูเขา",
+                title: "เดินป่าปีนเขา ภูเขาในแผ่นป้ายใดมีความสูงสูงกว่ากัน?",
+                options: [
+                    { name: "ภูเขาสูง 2.5 กิโลเมตร (km)", prefix: "Kilo", icon: "fa-mountain", iconColor: "text-emerald-700", isCorrect: true },
+                    { name: "เนินเขาสูง 900 เมตร (m)", prefix: "Base", icon: "fa-hill-rockslide", iconColor: "text-amber-700", isCorrect: false }
+                ],
+                explanation: "<b>2.5 km (กิโลเมตร)</b> = 2,500 เมตร (2.5 × 10<sup>3</sup> m)<br><b>900 m (เมตร)</b> = 900 เมตร<br>👉 <b>2.5 กิโลเมตร</b> สูงกว่า 900 เมตรอย่างมาก!"
+            },
+            {
+                id: 19,
+                tag: "ความต้านทานหูฟัง",
+                title: "เลือกซื้อหูฟังฟังเพลง หูฟังแผ่นป้ายใดมีค่าความต้านทานไฟฟ้าสูงกว่า?",
+                options: [
+                    { name: "หูฟังต้านทาน 2 กิโลโอห์ม (kΩ)", prefix: "Kilo", icon: "fa-headphones", iconColor: "text-pink-600", isCorrect: true },
+                    { name: "หูฟังต้านทาน 500 โอห์ม (Ω)", prefix: "Base", icon: "fa-plug", iconColor: "text-slate-600", isCorrect: false }
+                ],
+                explanation: "<b>2 kΩ (กิโลโอห์ม)</b> = 2,000 โอห์ม (2 × 10<sup>3</sup> Ω)<br><b>500 Ω (โอห์ม)</b> = 500 โอห์ม<br>👉 <b>2 กิโลโอห์ม</b> สูงกว่า 500 โอห์ม!"
+            },
+            {
+                id: 20,
+                tag: "ความกว้างเส้นผม",
+                title: "ส่องสไลด์เส้นผมในห้องฟิสิกส์ เส้นผมแผ่นป้ายใดมีความหนาเส้นใหญ่กว่า?",
+                options: [
+                    { name: "เส้นผมหนา 70 ไมโครเมตร (μm)", prefix: "Micro", icon: "fa-circle-dot", iconColor: "text-slate-800", isCorrect: true },
+                    { name: "เส้นผมนานาหนา 500 นาโนเมตร (nm)", prefix: "Nano", icon: "fa-atom", iconColor: "text-indigo-400", isCorrect: false }
+                ],
+                explanation: "<b>70 μm (ไมโครเมตร)</b> = 70,000 นาโนเมตร (70 × 10<sup>-6</sup> m)<br><b>500 nm (นาโนเมตร)</b> = 0.5 ไมโครเมตร (500 × 10<sup>-9</sup> m)<br>👉 <b>70 ไมโครเมตร</b> หนาใหญ่กว่านาโนเมตรมาก!"
+            },
+            {
+                id: 21,
+                tag: "ขนาดความจุฮาร์ดดิสก์",
+                title: "ซื้อฮาร์ดดิสก์ต่อสำรองข้อมูลคอมพิวเตอร์ แผ่นป้ายใดจุข้อมูลได้มากกว่า?",
+                options: [
+                    { name: "ฮาร์ดดิสก์ความจุ 4 TB", prefix: "Tera", icon: "fa-database", iconColor: "text-indigo-700", isCorrect: true },
+                    { name: "ฮาร์ดดิสก์ความจุ 2,000 GB", prefix: "Giga", icon: "fa-box", iconColor: "text-slate-500", isCorrect: false }
+                ],
+                explanation: "<b>4 TB (Tera)</b> = 4,000,000,000,000 Byte (4 × 10<sup>12</sup>)<br><b>2,000 GB (Giga)</b> = 2,000,000,000,000 Byte (2 × 10<sup>12</sup> หรือ 2 TB)<br>👉 <b>4 TB</b> ให้พื้นที่มากกว่า 2,000 GB ถึง 2 เท่า!"
+            },
+            {
+                id: 22,
+                tag: "ระยะทางบิน",
+                title: "เครื่องบินเดินทางไปต่างประเทศ เที่ยวบินแผ่นป้ายใดเดินทางระยะทางไกลกว่า?",
+                options: [
+                    { name: "บินระยะทาง 10,000 กิโลเมตร (km)", prefix: "Kilo", icon: "fa-plane-departure", iconColor: "text-sky-500", isCorrect: true },
+                    { name: "บินระยะทาง 5,000,000 เมตร (m)", prefix: "Base", icon: "fa-plane-arrival", iconColor: "text-blue-600", isCorrect: false }
+                ],
+                explanation: "<b>10,000 km (กิโลเมตร)</b> = 10,000,000 เมตร (10<sup>7</sup> m)<br><b>5,000,000 m (เมตร)</b> = 5,000 กิโลเมตร<br>👉 <b>10,000 กิโลเมตร</b> ไกลกว่าเป็นเท่าตัว!"
+            },
+            {
+                id: 23,
+                tag: "ขนาดกระดาษวาดรูป",
+                title: "เลือกแผ่นกระดาษวาดภาพโปสเตอร์ แผ่นป้ายใดมีความยาวกว้างมากกว่า?",
+                options: [
+                    { name: "กระดาษยาว 1 เมตร (m)", prefix: "Base", icon: "fa-note-sticky", iconColor: "text-amber-500", isCorrect: true },
+                    { name: "กระดาษยาว 80 เซนติเมตร (cm)", prefix: "Centi", icon: "fa-scroll", iconColor: "text-amber-700", isCorrect: false }
+                ],
+                explanation: "<b>1 m (เมตร)</b> = 100 เซนติเมตร<br><b>80 cm (เซนติเมตร)</b> = 0.8 เมตร<br>👉 <b>1 เมตร</b> ยาวกว่า 80 เซนติเมตร!"
+            },
+            {
+                id: 24,
+                tag: "แบตเตอรี่แท็บเล็ต",
+                title: "เลือกแท็บเล็ตวาดรูปแคนวาส แผ่นป้ายใดอึดทนจุกระแสไฟได้มากกว่า?",
+                options: [
+                    { name: "แท็บเล็ตแบต 10,000 mAh", prefix: "Milli", icon: "fa-tablet-screen-button", iconColor: "text-purple-600", isCorrect: true },
+                    { name: "แท็บเล็ตแบต 4,000 mAh", prefix: "Milli", icon: "fa-mobile-screen", iconColor: "text-indigo-500", isCorrect: false }
+                ],
+                explanation: "<b>10,000 mAh</b> = 10 Ah (10,000 × 10<sup>-3</sup> Ah)<br><b>4,000 mAh</b> = 4 Ah (4,000 × 10<sup>-3</sup> Ah)<br>👉 <b>10,000 mAh</b> จุอึดกว่า 4,000 mAh ถึง 2.5 เท่า!"
+            },
+            {
+                id: 25,
+                tag: "ความเร็วเน็ตมือถือ 5G",
+                title: "ใช้เน็ตมือถือถ่ายไลฟ์สดขายของ แผ่นป้ายใดมีความเร็วเน็ตสูงกว่า?",
+                options: [
+                    { name: "เน็ต 5G ความเร็ว 2 Gbps", prefix: "Giga", icon: "fa-signal", iconColor: "text-emerald-500", isCorrect: true },
+                    { name: "เน็ต 4G ความเร็ว 300 Mbps", prefix: "Mega", icon: "fa-mobile-retro", iconColor: "text-amber-600", isCorrect: false }
+                ],
+                explanation: "<b>2 Gbps (Giga)</b> = 2,000,000,000 Bit/s (2 × 10<sup>9</sup>)<br><b>300 Mbps (Mega)</b> = 300,000,000 Bit/s (300 × 10<sup>6</sup>)<br>👉 <b>2 Gbps</b> เร็วกว่า 300 Mbps มาก!"
+            },
+            {
+                id: 26,
+                tag: "น้ำหนักทองคำ",
+                title: "แผ่นป้ายร้านทองคำแท่ง แผ่นป้ายใดมีมวลน้ำหนักหนักกว่ากัน?",
+                options: [
+                    { name: "ทองคำหนัก 1 กิโลกรัม (kg)", prefix: "Kilo", icon: "fa-coins", iconColor: "text-yellow-500", isCorrect: true },
+                    { name: "ทองคำหนัก 100 กรัม (g)", prefix: "Base", icon: "fa-gem", iconColor: "text-amber-400", isCorrect: false }
+                ],
+                explanation: "<b>1 kg (กิโลกรัม)</b> = 1,000 กรัม<br><b>100 g (กรัม)</b> = 100 กรัม<br>👉 <b>1 กิโลกรัม</b> หนักกว่า 100 กรัม ถึง 10 เท่า!"
+            },
+            {
+                id: 27,
+                tag: "หลอดสีวาดภาพ",
+                title: "ซื้อหลอดสีน้ำมันวาดภาพศิลปะ แผ่นป้ายใดได้ปริมาณเนื้อสีมากกว่า?",
+                options: [
+                    { name: "หลอดสีขนาด 200 มิลลิลิตร (mL)", prefix: "Milli", icon: "fa-paint-roller", iconColor: "text-pink-500", isCorrect: true },
+                    { name: "หลอดสีขนาด 50 มิลลิลิตร (mL)", prefix: "Milli", icon: "fa-palette", iconColor: "text-purple-500", isCorrect: false }
+                ],
+                explanation: "<b>200 mL (มิลลิลิตร)</b> = 0.2 ลิตร<br><b>50 mL (มิลลิลิตร)</b> = 0.05 ลิตร<br>👉 <b>200 มิลลิลิตร</b> ได้สีเยอะกว่า 50 มิลลิลิตร ถึง 4 เท่า!"
+            },
+            {
+                id: 28,
+                tag: "ความเร็วพัดลม",
+                title: "เปิดพัดลมคลายร้อนในห้องเรียน พัดลมแผ่นป้ายใดหมุนด้วยความถี่รอบสูงกว่า?",
+                options: [
+                    { name: "พัดลมไอเย็น 3 กิโลเฮิรตซ์ (kHz)", prefix: "Kilo", icon: "fa-fan", iconColor: "text-sky-400", isCorrect: true },
+                    { name: "พัดลมมือถือ 500 เฮิรตซ์ (Hz)", prefix: "Base", icon: "fa-wind", iconColor: "text-blue-300", isCorrect: false }
+                ],
+                explanation: "<b>3 kHz (กิโลเฮิรตซ์)</b> = 3,000 รอบ/วินาที (3 × 10<sup>3</sup> Hz)<br><b>500 Hz (เฮิรตซ์)</b> = 500 รอบ/วินาที<br>👉 <b>3 กิโลเฮิรตซ์</b> แรงกว่า 500 เฮิรตซ์ ถึง 6 เท่า!"
+            },
+            {
+                id: 29,
+                tag: "พลังงานขนมปัง",
+                title: "ทานขนมปังเพิ่มพลังงานตอนเช้า แผ่นป้ายใดให้พลังงานสูงกว่า?",
+                options: [
+                    { name: "ขนมปังให้พลังงาน 2 เมกะจูล (MJ)", prefix: "Mega", icon: "fa-bread-slice", iconColor: "text-amber-600", isCorrect: true },
+                    { name: "ขนมปังให้พลังงาน 500 กิโลจูล (kJ)", prefix: "Kilo", icon: "fa-cookie", iconColor: "text-amber-800", isCorrect: false }
+                ],
+                explanation: "<b>2 MJ (เมกะจูล)</b> = 2,000,000 จูล (2 × 10<sup>6</sup> J)<br><b>500 kJ (กิโลจูล)</b> = 500,000 จูล (500 × 10<sup>3</sup> J)<br>👉 <b>2 เมกะจูล</b> ให้พลังงานมากกว่า 500 กิโลจูล ถึง 4 เท่า!"
+            },
+            {
+                id: 30,
+                tag: "ความยาวสายชาจไอโฟน",
+                title: "ซื้อสายชาร์จแบตมือถือ แผ่นป้ายใดมีความยาวสายยาวสะใจกว่า?",
+                options: [
+                    { name: "สายชาร์จยาว 2 เมตร (m)", prefix: "Base", icon: "fa-cable-car", iconColor: "text-indigo-600", isCorrect: true },
+                    { name: "สายชาร์จยาว 50 เซนติเมตร (cm)", prefix: "Centi", icon: "fa-charging-station", iconColor: "text-emerald-500", isCorrect: false }
+                ],
+                explanation: "<b>2 m (เมตร)</b> = 200 เซนติเมตร<br><b>50 cm (เซนติเมตร)</b> = 0.5 เมตร<br>👉 <b>2 เมตร</b> ยาวกว่า 50 เซนติเมตร ถึง 4 เท่า!"
+            }
+        ];
+
+        // Weird Prizes
+        const weirdPrizes = [
+            "ยางลบเป็ดเหลืองอาบน้ำเรืองแสงพลังควอนตัม 🦆✨",
+            "ปากกาล่องหนเขียนความลับด้วยรังสี UV 🖊️🕵️‍♀️",
+            "สติ๊กเกอร์โฮโลแกรมแมวเหมียวเดินทางข้ามมิติ 🐱🌌",
+            "ลูกอมรสชาติปริศนาทะลุมิติตะลุยจักรวาล 🍬🌀",
+            "พวงกุญแจโมเดลอะตอมจิ๋วสุดน่ารัก ⚛️🔑",
+            "สมุดโน้ตภาพวาดฟิสิกส์ฉบับจอมเวทไอน์สไตน์ 📓⚡",
+            "ดินสอเปลี่ยนสีตามอุณหภูมิร่างกายมนุษย์ ✏️🔥"
+        ];
+
+        // Application State
+        let state = {
+            playerName: "",
+            score: 0,
+            timeLeft: 60,
+            timerInterval: null,
+            currentQuestionIndex: 0,
+            gameQuestions: [],
+            isAnswered: false,
+            hallOfFame: JSON.parse(localStorage.getItem('physics_art_hof') || '[]')
+        };
+
+        // ... existing DOM element references ...
+        const screenWelcome = document.getElementById('screen-welcome');
+        const screenGame = document.getElementById('screen-game');
+        const screenResult = document.getElementById('screen-result');
+        const screenHof = document.getElementById('screen-hof');
+
+        const playerNameInput = document.getElementById('playerName');
+        const nameError = document.getElementById('nameError');
+        const timerText = document.getElementById('timerText');
+        const scoreCount = document.getElementById('scoreCount');
+        const currentQNum = document.getElementById('currentQNum');
+        const gameProgressBar = document.getElementById('gameProgressBar');
+        const questionTag = document.getElementById('questionTag');
+        const questionTitle = document.getElementById('questionTitle');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackSection = document.getElementById('feedbackSection');
+        const feedbackHeader = document.getElementById('feedbackHeader');
+        const feedbackExplanation = document.getElementById('feedbackExplanation');
+
+        const resultIcon = document.getElementById('resultIcon');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultSubtitle = document.getElementById('resultSubtitle');
+        const resName = document.getElementById('resName');
+        const resScore = document.getElementById('resScore');
+        const winSection = document.getElementById('winSection');
+        const loseSection = document.getElementById('loseSection');
+        const rewardItemName = document.getElementById('rewardItemName');
+
+        let videoStream = null;
+        const webcamVideo = document.getElementById('webcamVideo');
+        const snapshotCanvas = document.getElementById('snapshotCanvas');
+        const flashOverlay = document.getElementById('flashOverlay');
+        const countdownDisplay = document.getElementById('countdownDisplay');
+        const photoPlaceholder = document.getElementById('photoPlaceholder');
+        const photoResultContainer = document.getElementById('photoResultContainer');
+        const capturedPhotoImg = document.getElementById('capturedPhotoImg');
+        const startCaptureBtn = document.getElementById('startCaptureBtn');
+        let capturedDataUrl = "";
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // --- START GAME WITH OPTION RANDOMIZATION ---
+        function startGame() {
+            const name = playerNameInput.value.trim();
+            if (!name) {
+                nameError.classList.remove('hidden');
+                playerNameInput.focus();
+                return;
+            }
+            nameError.classList.add('hidden');
+            state.playerName = name;
+            state.score = 0;
+            state.timeLeft = 60;
+            state.currentQuestionIndex = 0;
+
+            // Pick 10 randomized questions from bank and shuffle options for each question
+            const picked = shuffleArray(questionBank).slice(0, 10);
+            state.gameQuestions = picked.map(q => {
+                const shuffledOpts = shuffleArray(q.options);
+                return {
+                    ...q,
+                    shuffledOptions: shuffledOpts,
+                    correctOptionIndex: shuffledOpts.findIndex(opt => opt.isCorrect)
+                };
+            });
+
+            screenWelcome.classList.add('hidden');
+            screenResult.classList.add('hidden');
+            screenHof.classList.add('hidden');
+            screenGame.classList.remove('hidden');
+
+            document.getElementById('displayPlayerName').textContent = state.playerName;
+            scoreCount.textContent = "0";
+            timerText.textContent = state.timeLeft;
+
+            loadQuestion();
+
+            // Start 60-Second Timer
+            if (state.timerInterval) clearInterval(state.timerInterval);
+            state.timerInterval = setInterval(() => {
+                state.timeLeft--;
+                timerText.textContent = state.timeLeft;
+                if (state.timeLeft <= 0) {
+                    clearInterval(state.timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        // --- LOAD QUESTION WITH RANDOMIZED CARDS & FUNNY ANIMATIONS ---
+        function loadQuestion() {
+            state.isAnswered = false;
+            document.getElementById('centerFeedbackModal').classList.add('hidden');
+
+            const q = state.gameQuestions[state.currentQuestionIndex];
+            currentQNum.textContent = state.currentQuestionIndex + 1;
+            gameProgressBar.style.width = `${((state.currentQuestionIndex + 1) / state.gameQuestions.length) * 100}%`;
+
+            questionTag.textContent = `หมวดหมู่: ${q.tag}`;
+            questionTitle.textContent = q.title;
+
+            // Render options (A and B randomized on screen with fun animations)
+            optionsContainer.innerHTML = "";
+            q.shuffledOptions.forEach((opt, idx) => {
+                const animClass = idx % 2 === 0 ? 'animate-wiggle' : 'animate-jiggle';
+                const btn = document.createElement('div');
+                btn.className = "option-btn bg-white border-2 border-slate-200 hover:border-pink-500 hover:shadow-xl rounded-2xl p-4 sm:p-6 cursor-pointer transition transform active:scale-95 flex flex-col justify-between group";
+                btn.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="w-10 h-10 rounded-xl bg-pink-100 group-hover:bg-pink-600 group-hover:text-white text-pink-600 font-extrabold flex items-center justify-center transition text-base sm:text-lg">
+                            แผ่นป้าย ${String.fromCharCode(65 + idx)}
+                        </span>
+                        <span class="text-xs sm:text-sm font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700">
+                            สินค้า
+                        </span>
+                    </div>
+                    <div class="text-center py-2 sm:py-4">
+                        <i class="fa-solid ${opt.icon} ${opt.iconColor} ${animClass} text-5xl sm:text-6xl mb-3 inline-block"></i>
+                        <div class="font-extrabold text-slate-800 text-base sm:text-xl leading-tight">
+                            ${opt.name}
+                        </div>
+                    </div>
+                    <div class="mt-2 bg-slate-50 border border-slate-200 py-2.5 px-3 rounded-xl text-center text-xs sm:text-sm font-bold text-slate-600 group-hover:bg-pink-50 group-hover:text-pink-600 transition">
+                        <i class="fa-solid fa-basket-shopping mr-1.5 text-pink-500"></i> หยิบใส่ตะกร้าช้อปปิ้ง
+                    </div>
+                `;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        // --- SELECT OPTION & SHOW CENTER OVERLAY POP-UP IMMEDIATELY ---
+        function selectOption(selectedIndex) {
+            if (state.isAnswered) return;
+            state.isAnswered = true;
+
+            const q = state.gameQuestions[state.currentQuestionIndex];
+            const isCorrect = (selectedIndex === q.correctOptionIndex);
+
+            if (isCorrect) {
+                state.score++;
+                scoreCount.textContent = state.score;
+                playSound('correct');
+            } else {
+                playSound('wrong');
+            }
+
+            // Highlight chosen and correct option cards
+            const optionCards = optionsContainer.children;
+            for (let i = 0; i < optionCards.length; i++) {
+                optionCards[i].style.pointerEvents = 'none';
+                if (i === q.correctOptionIndex) {
+                    optionCards[i].classList.remove('border-slate-200');
+                    optionCards[i].classList.add('border-emerald-500', 'bg-emerald-50/90', 'ring-4', 'ring-emerald-300');
+                } else if (i === selectedIndex && !isCorrect) {
+                    optionCards[i].classList.remove('border-slate-200');
+                    optionCards[i].classList.add('border-rose-500', 'bg-rose-50/90');
+                } else {
+                    optionCards[i].style.opacity = '0.4';
+                }
+            }
+
+            // Show Center Pop-up Overlay
+            const modal = document.getElementById('centerFeedbackModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalScoreBadge = document.getElementById('modalScoreBadge');
+            const modalExplanation = document.getElementById('modalExplanation');
+
+            if (isCorrect) {
+                modalIcon.className = "w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-3 text-4xl shadow-lg bg-emerald-100 text-emerald-600 animate-bounce";
+                modalIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                modalTitle.textContent = "ถูกต้องแม่นยำ! 🎉";
+                modalTitle.className = "text-2xl font-extrabold text-emerald-600 mb-1";
+                modalScoreBadge.className = "inline-block px-4 py-1.5 rounded-full font-bold text-sm mb-4 bg-emerald-100 text-emerald-800";
+                modalScoreBadge.innerHTML = `<i class="fa-solid fa-star text-amber-500 mr-1"></i> ได้รับ +1 คะแนน (รวม ${state.score} คะแนน)`;
+            } else {
+                modalIcon.className = "w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-3 text-4xl shadow-lg bg-rose-100 text-rose-600";
+                modalIcon.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+                modalTitle.textContent = "ยังไม่คุ้มค่าที่สุด! 😅";
+                modalTitle.className = "text-2xl font-extrabold text-rose-600 mb-1";
+                modalScoreBadge.className = "inline-block px-4 py-1.5 rounded-full font-bold text-sm mb-4 bg-slate-100 text-slate-700";
+                modalScoreBadge.innerHTML = `คะแนนสะสม: ${state.score} คะแนน`;
+            }
+
+            modalExplanation.innerHTML = q.explanation;
+            modal.classList.remove('hidden');
+        }
+
+        // --- INSTANT NEXT QUESTION (NO FADING DELAY) ---
+        function instantNextQuestion() {
+            document.getElementById('centerFeedbackModal').classList.add('hidden');
+            state.currentQuestionIndex++;
+            if (state.currentQuestionIndex < state.gameQuestions.length && state.timeLeft > 0) {
+                loadQuestion();
+            } else {
+                clearInterval(state.timerInterval);
+                endGame();
+            }
+        }
+
+        // ... existing endGame, webcam, and Hall of Fame methods ...
+        function endGame() {
+            screenGame.classList.add('hidden');
+            screenResult.classList.remove('hidden');
+
+            resName.textContent = state.playerName;
+            resScore.textContent = `${state.score} / ${state.gameQuestions.length} ข้อ`;
+
+            const passed = state.score >= 3;
+
+            if (passed) {
+                resultIcon.textContent = "🏆";
+                resultIcon.className = "w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-4 text-5xl bg-amber-100 text-amber-600 shadow-lg animate-bounce";
+                resultTitle.textContent = "ผ่านภารกิจยอดนักช้อปสายศิลป์! 🎉";
+                resultSubtitle.textContent = "คุณเข้าใจคำอุปสรรคฟิสิกส์ได้อย่างดีเยี่ยมและเลือกสินค้าได้คุ้มค่า!";
+                
+                winSection.classList.remove('hidden');
+                loseSection.classList.add('hidden');
+
+                const randomPrize = weirdPrizes[Math.floor(Math.random() * weirdPrizes.length)];
+                rewardItemName.textContent = randomPrize;
+
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+
+                initWebcam();
+            } else {
+                resultIcon.textContent = "💪";
+                resultIcon.className = "w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-4 text-5xl bg-rose-100 text-rose-600 shadow-lg";
+                resultTitle.textContent = "พยายามอีกนิดนะครับ!";
+                resultSubtitle.textContent = `คุณทำคะแนนได้ ${state.score} ข้อ (เกณฑ์ผ่านคือตอบถูก 3 ข้อขึ้นไป)`;
+                
+                winSection.classList.add('hidden');
+                loseSection.classList.remove('hidden');
+            }
+        }
+
+        async function initWebcam() {
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 360 } });
+                webcamVideo.srcObject = videoStream;
+                photoPlaceholder.classList.add('hidden');
+            } catch (err) {
+                console.warn("Webcam unavailable:", err);
+                photoPlaceholder.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-500 text-3xl mb-2"></i><p class="text-xs sm:text-sm">ไม่พบกล้องเว็บแคม ระบบจะใช้ภาพการ์ดความสำเร็จแทน</p>`;
+            }
+        }
+
+        function stopWebcam() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+        }
+
+        function startPhotoCountdown() {
+            startCaptureBtn.disabled = true;
+            countdownDisplay.classList.remove('hidden');
+            let count = 3;
+            countdownDisplay.textContent = count;
+
+            const countInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownDisplay.textContent = count;
+                } else if (count === 0) {
+                    countdownDisplay.textContent = "แชะ! 📸";
+                } else {
+                    clearInterval(countInterval);
+                    countdownDisplay.classList.add('hidden');
+                    takeSnapshot();
+                }
+            }, 1000);
+        }
+
+        function takeSnapshot() {
+            flashOverlay.classList.add('camera-flash');
+            setTimeout(() => flashOverlay.classList.remove('camera-flash'), 500);
+
+            const canvas = snapshotCanvas;
+            canvas.width = webcamVideo.videoWidth || 640;
+            canvas.height = webcamVideo.videoHeight || 360;
+            const ctx = canvas.getContext('2d');
+
+            if (videoStream && webcamVideo.readyState === webcamVideo.HAVE_ENOUGH_DATA) {
+                ctx.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = '#ec4899';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 28px Prompt';
+                ctx.fillText("ยอดนักช้อปฟิสิกส์ ม.4", 40, 100);
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+            ctx.fillRect(15, canvas.height - 65, canvas.width - 30, 50);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 15px Prompt';
+            ctx.fillText(`🏆 ${state.playerName} | คะแนน: ${state.score}/${state.gameQuestions.length}`, 30, canvas.height - 35);
+            ctx.font = '12px Prompt';
+            ctx.fillText(`คำอุปสรรคฟิสิกส์ ม.4 (สายศิลป์)`, 30, canvas.height - 18);
+
+            capturedDataUrl = canvas.toDataURL('image/png');
+            capturedPhotoImg.src = capturedDataUrl;
+
+            webcamVideo.classList.add('hidden');
+            photoPlaceholder.classList.add('hidden');
+            photoResultContainer.classList.remove('hidden');
+            startCaptureBtn.classList.add('hidden');
+
+            stopWebcam();
+            saveToHallOfFame();
+        }
+
+        function saveToHallOfFame() {
+            const now = new Date();
+            const timeString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            const entry = {
+                name: state.playerName,
+                score: state.score,
+                total: state.gameQuestions.length,
+                time: timeString,
+                photo: capturedDataUrl || "https://placehold.co/150x100/ec4899/ffffff?text=Physics+Art+Hero"
+            };
+
+            state.hallOfFame.push(entry);
+            state.hallOfFame.sort((a, b) => b.score - a.score);
+            if (state.hallOfFame.length > 20) {
+                state.hallOfFame = state.hallOfFame.slice(0, 20);
+            }
+
+            localStorage.setItem('physics_art_hof', JSON.stringify(state.hallOfFame));
+        }
+
+        function showHallOfFame() {
+            stopWebcam();
+            screenWelcome.classList.add('hidden');
+            screenGame.classList.add('hidden');
+            screenResult.classList.add('hidden');
+            screenHof.classList.remove('hidden');
+
+            renderHofTable();
+        }
+
+        function renderHofTable() {
+            const tbody = document.getElementById('hofTableBody');
+            const emptyHof = document.getElementById('emptyHof');
+            tbody.innerHTML = "";
+
+            if (state.hallOfFame.length === 0) {
+                emptyHof.classList.remove('hidden');
+                return;
+            }
+            emptyHof.classList.add('hidden');
+
+            state.hallOfFame.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = index % 2 === 0 ? 'bg-white hover:bg-pink-50/50' : 'bg-slate-50/50 hover:bg-pink-50/50';
+                
+                let rankBadge = `<span class="font-bold text-slate-700">${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="bg-amber-400 text-white font-extrabold px-2.5 py-1 rounded-full text-xs shadow-sm"><i class="fa-solid fa-crown mr-1"></i> 1</span>`;
+                if (index === 1) rankBadge = `<span class="bg-slate-300 text-slate-800 font-extrabold px-2.5 py-1 rounded-full text-xs shadow-sm">2</span>`;
+                if (index === 2) rankBadge = `<span class="bg-amber-600 text-white font-extrabold px-2.5 py-1 rounded-full text-xs shadow-sm">3</span>`;
+
+                tr.innerHTML = `
+                    <td class="p-3 font-medium">${rankBadge}</td>
+                    <td class="p-3 font-bold text-slate-800">${item.name}</td>
+                    <td class="p-3 font-bold text-emerald-600">${item.score} / ${item.total}</td>
+                    <td class="p-3 text-slate-500 text-xs">${item.time}</td>
+                    <td class="p-3 text-center">
+                        <img src="${item.photo}" class="w-20 h-12 object-cover rounded-lg mx-auto border border-pink-200 shadow-sm" alt="Snapshot">
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function backToWelcome() {
+            stopWebcam();
+            screenHof.classList.add('hidden');
+            screenWelcome.classList.remove('hidden');
+        }
+
+        function resetGame() {
+            stopWebcam();
+            screenResult.classList.add('hidden');
+            screenWelcome.classList.remove('hidden');
+            playerNameInput.value = "";
+            capturedDataUrl = "";
+            photoResultContainer.classList.add('hidden');
+            webcamVideo.classList.remove('hidden');
+            startCaptureBtn.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
